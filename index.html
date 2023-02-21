@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 테스트</title>
+    <style>
+        p { font-size: 20px;}
+        img {transition: all 0.3s;}
+        img:hover {transform: scale(1.2);}
+        a {font-size: 30px;}
+    </style>
+</head>
+
+<body>
+    <h1>Search Book</h1>
+    <input id="bookNameInput">
+    <button id="searchBtn">검색</button>
+    <div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+            $("#searchBtn").click(function() {
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#bookNameInput").val() },
+                    headers: { Authorization: "KakaoAK 4e0307ee5904685328189e9fb9d630e4" }
+                })
+                .done(function (msg) {
+                    console.log(msg.documents[0].title);
+                    console.log(msg.documents[0].thumbnail);
+                    console.log(msg.documents[0].url);
+                    $( "div" ).append( "<h2>" + msg.documents[0].title + "</h2>" );
+                    $( "div" ).append( "<img src='" + msg.documents[0].thumbnail + "'/>" );
+                    $( "div" ).append( "<p>" + "정가 : " + msg.documents[0].price + "</p>" );
+                    $( "div" ).append( "<p>" + "판매가 : " + msg.documents[0].sale_price + "</p>" );
+                    $( "div" ).append( "<p>" + "책 소개 : " + msg.documents[0].contents + "</p>" );
+                    $( "div" ).append( "<a href='" + msg.documents[0].url + "'/>" + "상세정보" + "</a>");
+
+                });
+            });
+         
+    </script>
+</body>
+
+</html>
