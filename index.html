@@ -10,7 +10,8 @@
         p { font-size: 20px;}
         img {transition: all 0.3s;}
         img:hover {transform: scale(1.2);}
-        a {font-size: 30px;}
+        a {font-size: 12px;text-decoration: none;}
+        div { width: 50%;margin: 0 auto;border: 1px solid #777;padding: 20px;}
     </style>
 </head>
 
@@ -30,16 +31,14 @@
                     headers: { Authorization: "KakaoAK 4e0307ee5904685328189e9fb9d630e4" }
                 })
                 .done(function (msg) {
-                    console.log(msg.documents[0].title);
-                    console.log(msg.documents[0].thumbnail);
-                    console.log(msg.documents[0].url);
-                    $( "div" ).append( "<h2>" + msg.documents[0].title + "</h2>" );
-                    $( "div" ).append( "<img src='" + msg.documents[0].thumbnail + "'/>" );
-                    $( "div" ).append( "<p>" + "정가 : " + msg.documents[0].price + "</p>" );
-                    $( "div" ).append( "<p>" + "판매가 : " + msg.documents[0].sale_price + "</p>" );
-                    $( "div" ).append( "<p>" + "책 소개 : " + msg.documents[0].contents + "</p>" );
-                    $( "div" ).append( "<a href='" + msg.documents[0].url + "'/>" + "상세정보" + "</a>");
-
+                    console.log(msg)
+                    for (var i = 0; i < 10; i++){
+                    $( "div" ).append( "<h2>" + msg.documents[i].title + "</h2>" );
+                    $( "div" ).append( "<a href='" + msg.documents[i].url + "'/>" + "<img src='" + msg.documents[i].thumbnail + "'/>" + " 이미지를 클릭하면 상세정보로 이동 " + "</a>" );
+                    $( "div" ).append( "<p>" + "정가 : " + msg.documents[i].price + "</p>" );
+                    $( "div" ).append( "<p>" + "판매가 : " + msg.documents[i].sale_price + "</p>" );
+                    $( "div" ).append( "<p>" + "책 소개 : " + msg.documents[i].contents + "</p>" );
+                }
                 });
             });
          
