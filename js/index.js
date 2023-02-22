@@ -14,7 +14,7 @@ $("#searchBtn").click(function() {
     })
     .done(function (msg) {
         console.log(msg)
-        for (var i = 0; i < 10; i++){
+        for (var i = 0; i < 3; i++){
         $( "div" ).append( "<h2>" + msg.documents[i].title + "</h2>" );
         $( "div" ).append( "<a href='" + msg.documents[i].url + "'/>" + "<img src='" + msg.documents[i].thumbnail + "'/>" + " 이미지를 클릭하면 상세정보로 이동 " + "</a>" );
         $( "div" ).append( "<p>" + "정가 : " + msg.documents[i].price + "</p>" );
@@ -34,7 +34,7 @@ $("#searchWebBtn").click(function() {
     })
     .done(function (msg) {
         console.log(msg)
-        for (var i = 0; i < 10; i++){
+        for (var i = 0; i < 3; i++){
         $( '.result_Wb' ).append( "<h2>" + msg.documents[i].title + "</h2>" );
         $( '.result_Wb' ).append( "<a href='" + msg.documents[i].url + "'/>" + "상세정보로 이동 " + "</a>" );
         $( '.result_Wb' ).append( "<p>" + "정가 : " + msg.documents[i].contents + "</p>" );
@@ -52,7 +52,7 @@ $("#searchImageBtn").click(function() {
     })
     .done(function (msg) {
         console.log(msg)
-        for (var i = 0; i < 10; i++){
+        for (var i = 0; i < 3; i++){
         $( '.result_Ib' ).append( "<h2>" + msg.documents[i].collection + "</h2>" );
         $( '.result_Ib' ).append( "<a href='" + msg.documents[i].image_url + "'/>" + "<img src='" + msg.documents[i].thumbnail_url + "'/>" + " 이미지 크게 보기 " + "</a>" );
         $( '.result_Ib' ).append( "<p>" + "출처 : " + msg.documents[i].display_sitename + "</p>" );
@@ -82,7 +82,7 @@ $("#searchVideoBtn").click(function() {
     });
 });
 
-//카페 검색
+//블로그 검색
 
 $("#searchBlogBtn").click(function() {
     $.ajax({
