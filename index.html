@@ -5,44 +5,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <title>API 테스트</title>
-    <style>
-        p { font-size: 20px;}
-        img {transition: all 0.3s;}
-        img:hover {transform: scale(1.2);}
-        a {font-size: 12px;text-decoration: none;}
-        div { width: 50%;margin: 0 auto;border: 1px solid #777;padding: 20px;}
-    </style>
 </head>
 
 <body>
+    <div id="wrap">
+    <div id="book">
+    <div class="searchTab">
     <h1>Search Book</h1>
-    <input id="bookNameInput">
+    <p>
+    <input id="bookNameInput" placeholer="책 이름을 검색하세요">
     <button id="searchBtn">검색</button>
-    <div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-            $("#searchBtn").click(function() {
-                $.ajax({
-                    method: "GET",
-                    url: "https://dapi.kakao.com/v3/search/book?target=title",
-                    data: { query: $("#bookNameInput").val() },
-                    headers: { Authorization: "KakaoAK 4e0307ee5904685328189e9fb9d630e4" }
-                })
-                .done(function (msg) {
-                    console.log(msg)
-                    for (var i = 0; i < 10; i++){
-                    $( "div" ).append( "<h2>" + msg.documents[i].title + "</h2>" );
-                    $( "div" ).append( "<a href='" + msg.documents[i].url + "'/>" + "<img src='" + msg.documents[i].thumbnail + "'/>" + " 이미지를 클릭하면 상세정보로 이동 " + "</a>" );
-                    $( "div" ).append( "<p>" + "정가 : " + msg.documents[i].price + "</p>" );
-                    $( "div" ).append( "<p>" + "판매가 : " + msg.documents[i].sale_price + "</p>" );
-                    $( "div" ).append( "<p>" + "책 소개 : " + msg.documents[i].contents + "</p>" );
-                }
-                });
-            });
-         
-    </script>
+    </p>
+    </div><!-- searchTab -->
+    <div class="result_Sb">
+    </div><!-- result_Sb -->
+    </div><!-- book -->
+
+    <div id="web">
+        <div class="searchTab">
+        <h1>Search web</h1>
+        <p>
+        <input id="webNameInput">
+        <button id="searchWebBtn">검색</button>
+        </p>
+        </div><!-- searchWebTab -->
+        <div class="result_Wb">
+        </div><!-- result_Wb -->
+        </div><!-- web -->
+    
+    <div id="video">
+            <div class="searchTab">
+            <h1>Search Videos</h1>
+            <p>
+            <input id="videoNameInput">
+            <button id="searchVideoBtn">검색</button>
+            </p>
+            </div><!-- searchWebTab -->
+            <div class="result_Vb">
+            </div><!-- result_Vb -->
+            </div><!-- web -->
+
+    <div id="image">
+        <div class="searchTab">
+        <h1>Search Images</h1>
+        <p>
+        <input id="imageNameInput">
+        <button id="searchImageBtn">검색</button>
+        </p>
+        </div><!-- searchWebTab -->
+        <div class="result_Ib">
+        </div><!-- result_Ib -->
+        </div><!-- web -->
+
+        <div id="blog">
+            <div class="searchTab">
+            <h1>Search blog</h1>
+            <p>
+            <input id="blogNameInput">
+            <button id="searchBlogBtn">검색</button>
+            </p>
+            </div><!-- searchWebTab -->
+            <div class="result_Bb">
+            </div><!-- result_Ib -->
+            </div><!-- web -->
+
+        <div id="cafe">
+            <div class="searchTab">
+            <h1>Search cafe</h1>
+            <p>
+            <input id="cafeNameInput">
+            <button id="searchCafeBtn">검색</button>
+            </p>
+            </div><!-- searchWebTab -->
+            <div class="result_Cb">
+            </div><!-- result_Ib -->
+            </div><!-- web -->
+
+
+    
+
+    </div><!-- wrap -->
+
+    <script src="./js/index.js"></script>
 </body>
 
 </html>

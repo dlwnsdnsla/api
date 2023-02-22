@@ -1,0 +1,12 @@
+@charset "utf-8";
+#wrap {width: 100%;}
+        p { font-size: 20px;}
+        img {transition: all 0.3s;}
+        img:hover {transform: scale(1.2);}
+        a {font-size: 12px;text-decoration: none;}
+        h1 { text-align:center;}
+        .searchTab {flex: 1;}
+        .searchTab p { display: flex; padding-bottom: 20px;}
+        .searchTab p input {flex: 1;height: 56px;}
+        .searchTab p button {width: 80px;}
+
