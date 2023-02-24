@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 테스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        table {
+            text-align: left;
+            width: 100%;
+        }
+        h1 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <select name="" id="sigunguName"></select>
+    <button id="searchBtn">검색</button>
+    <div class="box">
+    </div>
+    <script>
+        $("#searchBtn").click(function() {
+        $.ajax({
+            method: "GET",
+            url: "https://dapi.kakao.com/v2/local/search/keyword.json?radius=2000",
+            headers: { Authorization: "KakaoAK 4e0307ee5904685328189e9fb9d630e4" },
+            data: {
+                query:"캠핑장",
+                pageable_count:'100'
+        }
+        })
+        .done(function (msg) {
+            console.log(msg);
+            for (var i = 0; i < 20; i++){
+            $( 'div' ).append( `<h2><a href="${msg.documents[i].place_url}">${msg.documents[i].place_name}<a></h2>` );
+            $( 'div' ).append( `<p>주소 : ${msg.documents[i].address_name}</p>` );
+            }
+        });
+        
+    });
+        
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 테스트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        table {
+            text-align: left;
+            width: 100%;
+        }
+        h1 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="dailyTxt">박스오피스(일간)</h1>
+    <h1 class="weeklyTxt">박스오피스(주간)</h1>
+    <button class="searchBtn">검색</button>
+    <div id="wrap">
+        <table>
+
+        </table>
+    </div>
+    <script>
+        function getDay(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = ("0" + (1 + date.getMonth())).slice(-2);
+        var day = ("0" + date.getDate()).slice(-2);
+        var yesterday = day -1;
+
+        return year + month + yesterday;
+        }
+        $.ajax({
+            method: "GET",
+            url: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&",
+            data: { targetDt: getDay },
+        })
+        .done(function (msg) {
+            console.log(msg);
+        $(".searchBtn").click(function() {
+            for (var i = 0; i < 10; i++){
+            $( "table" ).append( `<colgroup><col width="10%"><col width="50%"><col width="20%"><col width="20%"></colgroup>` );
+            $( "table" ).append( `<tr><th>순위</th><th>영화 제목</th><th>개봉일</th><th>누적관객수</th></tr>`);
+            $( "table" ).append( `<td>${msg.boxOfficeResult.dailyBoxOfficeList[i].rank}</td>`);
+            $( "table" ).append( `<td id="${msg.boxOfficeResult.dailyBoxOfficeList[i].movieCd}" class="list">${msg.boxOfficeResult.dailyBoxOfficeList[i].movieNm}</td>` );
+            $( "table" ).append( `<td>${msg.boxOfficeResult.dailyBoxOfficeList[i].openDt}</td>` );
+            $( "table" ).append( `<td>${msg.boxOfficeResult.dailyBoxOfficeList[i].audiAcc}명</td>` );
+            }
+        });
+    });
+    $("table").on("click",".list", function() {
+        let d = $(this);
+        let movie = d.attr("id");
+        $.ajax({
+            method: "GET",
+            url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd="+movie,
+        })
+        .done(function (sub) {
+            console.log(sub);
+            d.append( `<td>${sub.movieInfoResult.movieInfo.directors[0].peopleNm}</td>`);
+        });
+        });
+        
+    
+    </script>
+</body>
+
+</html>
